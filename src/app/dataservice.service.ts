@@ -17,6 +17,7 @@ export class DataserviceService {
     return this.httpClient.post<any>(this.baseUrl + '/login.php', { username, password })
         .pipe(map(Usermodule => {
             this.setToken(Usermodule[0].name);
+            this.setName(Usermodule[0].FIRST_NAME , Usermodule[0].LAST_NAME);
             this.getLoggedInName.emit(true);
             return Usermodule;
         }));
@@ -57,16 +58,18 @@ getToken() {
   return localStorage.getItem('token'); 
 }
 
-setName(name: string) {
-  localStorage.setItem('name', name);
+setName(FIRST_NAME: string, LAST_NAME: string) {
+  localStorage.setItem('fullname', FIRST_NAME +" "+LAST_NAME);
 }
 
 getName() {
-  return localStorage.getItem('name'); 
+  return localStorage.getItem('fullname'); 
 }
  
 deleteToken() {
   localStorage.removeItem('token');
+  localStorage.removeItem('fullname'); 
+
 }
  
 isLoggedIn() {

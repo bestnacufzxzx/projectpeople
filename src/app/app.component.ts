@@ -6,11 +6,30 @@ import { DataserviceService } from './dataservice.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'Angular8crud';
+
+
   loginbtn:boolean;
   logoutbtn:boolean;
+
+  ngOnInit() {
+    this.getfulname();
+ 
+  }
+
+  getfulname()
+  {
+    let fullname = localStorage.getItem('fullname');
+    return  fullname;
+    // console.log(fullname);
+  }
+
   constructor(private dataService: DataserviceService) {
+   
+
+    
     dataService.getLoggedInName.subscribe(name => this.changeName(name));
     if(this.dataService.isLoggedIn())
     {
