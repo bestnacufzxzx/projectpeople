@@ -15,29 +15,29 @@ export class DashboardComponent implements OnInit {
  
   constructor(private dataService: DataserviceService,private router:Router) { }
  
+
+
   ngOnInit() {
     this.getuserdetails();
- 
   }
-
-getuserdetails()
-{
-  this.dataService.getAllUsers(this.cat).subscribe(response =>
-    {
-      this.users = response.map(item =>
+  getuserdetails()
+  {
+    this.dataService.getAllUsers(this.cat).subscribe(response =>
       {
-        return new Usermodule(
-            item.CITIZEN_ID,
-            item.TITLE,
-            item.FIRST_NAME,
-            item.LAST_NAME,
-            item.SEX,
-            item.BLOOD,
-            item.BIRTH_DATE,
-        );
+        this.users = response.map(item =>
+        {
+          return new Usermodule(
+              item.CITIZEN_ID,
+              item.TITLE,
+              item.FIRST_NAME,
+              item.LAST_NAME,
+              item.SEX,
+              item.BLOOD,
+              item.BIRTH_DATE,
+          );
+        });
       });
-    });
-}
+  }
 // deleteuserdetails(user:Usermodule)
 // {
 //   this.dataService.removeEmployee(user.CITIZEN_ID)

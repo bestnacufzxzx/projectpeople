@@ -1,8 +1,9 @@
 <div class="container">
+  <br>
     <div class="row">
       <div class="col-md-12">
-        <h2 class="text-center" > Employee Details</h2>
-        <button class="btn btn-success text-right"  (click)="addUser()"> Add User</button>
+        <h2 class="text-center" >ข้อมูลการลงทะเบียน</h2>
+        <button class="btn btn-success text-left"  (click)="addUser()"> Add User</button>
         <table class="table table-striped">
           <thead>
           <tr>
@@ -23,11 +24,12 @@
             <td>{{num+1}}</td>
             <td>{{user.CITIZEN_ID}}</td>
             <td>{{user.TITLE}}</td>
+            <!-- <td>{{this.chack.user}}</td> -->
             <td>{{user.FIRST_NAME}}</td>
             <td>{{user.LAST_NAME}}</td>
             <td>{{user.SEX}}</td>
             <td>{{user.BLOOD}}</td>
-            <td>{{user.BIRTH_DATE}}</td>
+            <td>{{user.BIRTH_DATE| date: 'dd/MM/yyyy'}}</td>
             <!-- <td><button class="btn btn-danger" (click)="deleteuserdetails(user)"> Delete</button></td> -->
               <td>  <button class="btn btn-success" (click)="updateUser(user)" style="margin-left: 20px;"> Edit</button></td>
           </tr>
