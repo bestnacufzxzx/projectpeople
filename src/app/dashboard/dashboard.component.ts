@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
 //   this.router.navigate(['edit']);
 // };
 addUser(): void {
-  this.router.navigate(['create']);
+  this.router.navigate(['add']);
 };
 
 }

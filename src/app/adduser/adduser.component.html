@@ -1,0 +1,88 @@
+<br>
+<h2 class="text-center">เพิ่มข้อมูลทะเบียน</h2>
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="jumbotron">
+            <form [formGroup]="angForm" (ngSubmit)="postdata(angForm)" autocomplete="off" >
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">เลขบัตรประชาชน</label>
+                            <input type="number" formControlName="idcard" id="idcard" class="form-control input-sm" autocomplete="off" placeholder="เลขบัตรประชาชน">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">คำนำหน้าชื่อ</label>
+                            <select formControlName="title" id="title" class="form-control input-sm" autocomplete="off" placeholder="เลขบัตรประชาชน">
+                                <option value="" selected disabled>เลือก</option>
+                                <option value="1">นาย</option>
+                                <option value="2">นาง</option>
+                                <option value="3">นางสาว</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">เพศ</label>
+                            <select formControlName="sex" id="sex" class="form-control input-sm" autocomplete="off" required>
+                                <option value="" selected disabled>เลือก</option>
+                                <option value="M">ชาย</option>
+                                <option value="F">หญิง</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">ชื่อตัวไทย</label>
+                            <input type="text" formControlName="firstname" id="firstname" class="form-control input-sm" autocomplete="off" placeholder="ชื่อตัวไทย">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">ชื่อสกุลไทย</label>
+                            <input type="text" formControlName="lastname" id="lastname" class="form-control input-sm" autocomplete="off" placeholder="ชื่อสกุลไทย">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">หมู่โลหิต</label>
+                            <select formControlName="blood" id="blood" class="form-control input-sm" autocomplete="off">
+                                <option value="" selected disabled>เลือก</option>
+                                <option value="1">เอ</option>
+                                <option value="2">บี</option>
+                                <option value="2">เอบี</option>
+                                <option value="2">โอ</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">วันเกิด</label>
+                            <div class="input-group">
+                                <input class="form-control input-sm" autocomplete="off" placeholder="dd/mm/yyyy" formControlName="birthdate" id="birthdate" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="!angForm.valid">บันทึก</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+ 
+</div>

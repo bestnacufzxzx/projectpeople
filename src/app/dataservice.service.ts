@@ -16,7 +16,8 @@ export class DataserviceService {
   public userlogin(username, password) {
     return this.httpClient.post<any>(this.baseUrl + '/login.php', { username, password })
         .pipe(map(Usermodule => {
-            this.setToken(Usermodule[0].name);
+            this.setToken(Usermodule[0].USER_NAME);
+            this.setRole(Usermodule[0].USER_NAME);
             this.setName(Usermodule[0].FIRST_NAME , Usermodule[0].LAST_NAME);
             this.getLoggedInName.emit(true);
             return Usermodule;
@@ -24,6 +25,14 @@ export class DataserviceService {
 }
 public userregistration(name,email,pwd,mobile) {
   return this.httpClient.post<any>(this.baseUrl + '/registration.php', { name,email, pwd,mobile })
+      .pipe(map(Usermodule => {
+          return Usermodule;
+      }));
+}
+
+
+public adduser(idcard, title, firstname, lastname, sex, blood, birthdate) {
+  return this.httpClient.post<any>(this.baseUrl + '/adduser.php', { idcard, title, firstname, lastname, sex, blood, birthdate })
       .pipe(map(Usermodule => {
           return Usermodule;
       }));
@@ -60,6 +69,14 @@ getToken() {
 
 setName(FIRST_NAME: string, LAST_NAME: string) {
   localStorage.setItem('fullname', FIRST_NAME +" "+LAST_NAME);
+}
+
+setRole(role:string){
+  localStorage.setItem('role', role);
+}
+
+getRole(){
+  return localStorage.getItem('role');
 }
 
 getName() {

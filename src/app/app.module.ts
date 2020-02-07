@@ -10,6 +10,9 @@ import { RegistrationComponent } from './registration/registration.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { EdituserComponent } from './edituser/edituser.component';
+import { AdduserComponent } from './adduser/adduser.component';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
  
 @NgModule({
   declarations: [
@@ -18,14 +21,16 @@ import { EdituserComponent } from './edituser/edituser.component';
     RegistrationComponent,
     DashboardComponent,
     CreateuserComponent,
-    EdituserComponent
+    EdituserComponent,
+    AdduserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-     ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

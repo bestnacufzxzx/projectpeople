@@ -11,6 +11,9 @@ export class Usermodule {
     public SEX:string;
     public BLOOD:string;
     public BIRTH_DATE:string;
+    public USER_NAME:string;
+
+    
     constructor(CITIZEN_ID:string, TITLE:string, FIRST_NAME:string, LAST_NAME:string, SEX:string, BLOOD:string, BIRTH_DATE:string) 
     {
       this.CITIZEN_ID = CITIZEN_ID;
