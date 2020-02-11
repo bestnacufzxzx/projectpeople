@@ -13,6 +13,8 @@ import { EdituserComponent } from './edituser/edituser.component';
 import { AdduserComponent } from './adduser/adduser.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { EdithistoryuserComponent } from './edithistoryuser/edithistoryuser.component';
+import { ValidationMessagesComponent } from './services/validation-messages.component';
  
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CreateuserComponent,
     EdituserComponent,
     AdduserComponent,
+    EdithistoryuserComponent,
+    ValidationMessagesComponent,          //add11/2/2563
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [               //add11/2/2563
+    ValidationMessagesComponent
+  ]
 })
 export class AppModule { }

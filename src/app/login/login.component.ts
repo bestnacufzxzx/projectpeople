@@ -23,12 +23,10 @@ export class LoginComponent implements OnInit {
  
    get f() { return this.angForm.controls; }
 
-
    onReset() {
        this.submitted = false;
        this.angForm.reset();
    }
-
 
   ngOnInit() {
   }
@@ -43,8 +41,6 @@ export class LoginComponent implements OnInit {
     }
 
     // display form values on success
-
-
 
     this.dataService.userlogin(angForm1.value.username,angForm1.value.password)
       .pipe(first())

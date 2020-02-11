@@ -3,7 +3,7 @@
 export class Usermodule {
 
   // <!-- CITIZEN_ID,TITLE,FIRST_NAME,LAST_NAME,SEX,BLOOD,BIRTH_DATE FROM is_t_citizen -->
-
+    public ID: string;
     public CITIZEN_ID: string;
     public TITLE: string;
     public FIRST_NAME:string;
@@ -14,8 +14,9 @@ export class Usermodule {
     public USER_NAME:string;
 
     
-    constructor(CITIZEN_ID:string, TITLE:string, FIRST_NAME:string, LAST_NAME:string, SEX:string, BLOOD:string, BIRTH_DATE:string) 
+    constructor(ID:string, CITIZEN_ID:string, TITLE:string, FIRST_NAME:string, LAST_NAME:string, SEX:string, BLOOD:string, BIRTH_DATE:string) 
     {
+      this.ID = ID;
       this.CITIZEN_ID = CITIZEN_ID;
       if(TITLE === '1'){
         this.TITLE = "นาย";

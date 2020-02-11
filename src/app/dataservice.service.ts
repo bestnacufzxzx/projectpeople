@@ -31,8 +31,8 @@ public userregistration(name,email,pwd,mobile) {
 }
 
 
-public adduser(idcard, title, firstname, lastname, sex, blood, birthdate) {
-  return this.httpClient.post<any>(this.baseUrl + '/adduser.php', { idcard, title, firstname, lastname, sex, blood, birthdate })
+public adduser(idcard, title, firstname, lastname, sex, blood, birthdate, createby) {
+  return this.httpClient.post<any>(this.baseUrl + '/adduser.php', { idcard, title, firstname, lastname, sex, blood, birthdate, createby })
       .pipe(map(Usermodule => {
           return Usermodule;
       }));
@@ -44,6 +44,24 @@ public updateuserdetails(id,name,email,pwd,mobile) {
       }));
  
 }
+
+public edithistoryuser(id, idcard, title, firstname, lastname, sex, blood, birthdate, updateby) {
+  return this.httpClient.post<any>(this.baseUrl + '/updatehitoryuser.php', { id, idcard, title, firstname, lastname, sex, blood, birthdate, updateby })
+    .pipe(map(Usermodule => {
+          return Usermodule;
+      }));
+ 
+}
+
+public gethistoryUserId(empid: number): Observable<Usermodule[]>
+  {
+    return this.httpClient.get<Usermodule[]>(
+      this.baseUrl + '/gethistoryuserdataone.php?'+ 'empid=' + empid 
+      );
+  }
+
+
+
 removeEmployee(empid: number): Observable<Usermodule[]> {
   return this.httpClient.delete<Usermodule[]>(this.baseUrl+'/deletedata.php?empid='+empid );
 }

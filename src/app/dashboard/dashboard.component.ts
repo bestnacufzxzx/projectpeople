@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
         this.users = response.map(item =>
         {
           return new Usermodule(
+              item.ID,
               item.CITIZEN_ID,
               item.TITLE,
               item.FIRST_NAME,
@@ -52,6 +53,11 @@ export class DashboardComponent implements OnInit {
 //   window.localStorage.setItem("editId", user.CITIZEN_ID.toString());
 //   this.router.navigate(['edit']);
 // };
+updatehistoryUser(user: Usermodule): void {
+  window.localStorage.removeItem("editId");
+  window.localStorage.setItem("editId", user.ID.toString());
+  this.router.navigate(['edituser']);
+};
 addUser(): void {
   this.router.navigate(['add']);
 };

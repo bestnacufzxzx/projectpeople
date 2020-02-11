@@ -1,11 +1,16 @@
 <div class="container">
   <br>
+  <h2 class="text-center" >ข้อมูลการลงทะเบียน</h2>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="float-right">
+        <button class="btn btn-outline-primary btn-sm"  (click)="addUser()">เพิ่มข้อมูลทะเบียน</button>
+      </div>
+    </div>
+  </div>
+  <br>
     <div class="row">
       <div class="col-md-12">
-        <h2 class="text-center" >ข้อมูลการลงทะเบียน</h2>
-        <div>
-          <button class="btn btn-success text-left"  (click)="addUser()"> Add User</button>
-        </div>
         <table class="table table-striped">
           <thead>
           <tr>
@@ -23,7 +28,7 @@
           <tbody>
           <tr *ngFor="let user of users; let num = index">
    
-            <td>{{num+1}}</td>
+            <td>{{user.ID}}</td>
             <td>{{user.CITIZEN_ID}}</td>
             <td>{{user.TITLE}}</td>
             <!-- <td>{{this.chack.user}}</td> -->
@@ -33,7 +38,7 @@
             <td>{{user.BLOOD}}</td>
             <td>{{user.BIRTH_DATE| date: 'dd/MM/yyyy'}}</td>
             <!-- <td><button class="btn btn-danger" (click)="deleteuserdetails(user)"> Delete</button></td> -->
-              <td>  <button class="btn btn-success" (click)="updateUser(user)" style="margin-left: 20px;"> Edit</button></td>
+              <td>  <button class="btn btn-success" (click)="updatehistoryUser(user)" style="margin-left: 20px;"> Edit</button></td>
           </tr>
           </tbody>
         </table>

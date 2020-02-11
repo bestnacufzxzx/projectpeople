@@ -7,7 +7,8 @@ import { AuthguardGuard } from './authguard.guard';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import { AdduserComponent } from './adduser/adduser.component';
-import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { EdithistoryuserComponent } from './edithistoryuser/edithistoryuser.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'create', component: CreateuserComponent,canActivate: [AuthguardGuard] },
   { path: 'edit', component: EdituserComponent,canActivate: [AuthguardGuard] },
   { path: 'add', component: AdduserComponent,canActivate: [AuthguardGuard] },
+  { path: 'edituser', component: EdithistoryuserComponent,canActivate: [AuthguardGuard] },
   { path: 'dashboard', component: DashboardComponent,canActivate: [AuthguardGuard] }
  
 ]

@@ -1,5 +1,5 @@
 <br>
-<h2 class="text-center">เพิ่มข้อมูลทะเบียน</h2>
+<h2 class="text-center">แก้ไขข้อมูลทะเบียน</h2>
 <div class="row">
     <div class="col-md-3">
     </div>
@@ -13,7 +13,7 @@
                             <input type="number" formControlName="idcard" id="idcard" class="form-control input-sm" autocomplete="off" placeholder="เลขบัตรประชาชน" [ngClass]="{ 'is-invalid': submitted && f.idcard.errors }"/>
                             <div *ngIf="submitted && f.idcard.errors" class="invalid-feedback">
                                 <div *ngIf="f.idcard.errors.required">กรุณากรอกเลขบัตรประชาชน</div>
-                                <div *ngIf="f.password.errors.minlength">กรุณากรอกเลขบัตรประชาชนกรอกให้ครบ 13 หลัก</div>
+                                <div *ngIf="f.idcard.errors.minlength">กรุณากรอกเลขบัตรประชาชนกรอกให้ครบ 13 หลัก</div>
 
                             </div>
                         </div>

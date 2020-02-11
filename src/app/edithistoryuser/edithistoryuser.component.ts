@@ -1,8 +1,9 @@
-import { Component, OnInit, Injectable} from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataserviceService } from '../dataservice.service';
+// import { ValidationService } from 'src/app/Services/validation.service';
 import {
   NgbCalendar,
   NgbDateAdapter,
@@ -65,71 +66,71 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 }
 
 @Component({
-  selector: 'app-adduser',
-  templateUrl: './adduser.component.html',
-  styleUrls: ['./adduser.component.css'],
+  selector: 'app-edithistoryuser',
+  templateUrl: './edithistoryuser.component.html',
+  styleUrls: ['./edithistoryuser.component.css'],
   providers: [
     {provide: NgbDateAdapter, useClass: CustomAdapter},
     {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}
   ]
 })
 
-export class AdduserComponent implements OnInit {
+export class EdithistoryuserComponent implements OnInit {
 
   angForm: FormGroup;
-  submitted = false;
-
   constructor(private fb: FormBuilder,private dataService: DataserviceService,private router:Router) {
  
     this.angForm = this.fb.group({
-      idcard: ['', Validators.required],
-      title: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      sex: ['', Validators.required],
-      blood: ['', Validators.required],
-      birthdate: ['', Validators.required],
- 
+        id: [''],
+        idcard: ['',  Validators.required],
+        title: ['', Validators.required],
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
+        sex: ['', Validators.required],
+        blood: ['', Validators.required],
+        birthdate: ['', Validators.required],
+   
     });
    }
  
-   get f() { return this.angForm.controls; }
-
-   onReset() {
-       this.submitted = false;
-       this.angForm.reset();
-   }
-
   ngOnInit() {
-    // let createby = localStorage.getItem('role');
-    // console.log(createby)
-  }
+    let Id = window.localStorage.getItem("editId");
 
+    console.log(Id);
+    if(!Id) {
+      this.router.navigate(['list-user']);
+      return;
+    }
+    this.dataService.gethistoryUserId(+Id)
+      .subscribe( data => {
+      //  this.angForm.controls[email].setValue('name')
+      //  this.email.nativeElement.value = 'This is new value';
+        this.angForm.patchValue({
+          id:data[0].ID, idcard:data[0].CITIZEN_ID, title:data[0].TITLE, firstname:data[0].FIRST_NAME, lastname:data[0].LAST_NAME, sex:data[0].SEX, blood:data[0].BLOOD, birthdate:data[0].BIRTH_DATE
+       });
+      });
+  }
   postdata(angForm1:NgForm)
   {
-    this.submitted = true;
+    let updateby = localStorage.getItem('role');
+    console.log(updateby);
+    this.dataService.edithistoryuser(angForm1.value.id,angForm1.value.idcard,angForm1.value.title,angForm1.value.firstname,angForm1.value.lastname,angForm1.value.sex,angForm1.value.blood,angForm1.value.birthdate,updateby)
+ 
+    .pipe(first())
+    .subscribe(
+        data => {
+          this.router.navigate(['dashboard']); 
+          alert("บันทึกสำเร็จ");
 
-    // stop here if form is invalid
-    if (this.angForm.invalid) {
-        return;
-    }
-    
-    let createby = localStorage.getItem('role');
-    this.dataService.adduser(angForm1.value.idcard,angForm1.value.title,angForm1.value.firstname,angForm1.value.lastname,angForm1.value.sex,angForm1.value.blood,angForm1.value.birthdate,createby)
-      .pipe(first())
-      .subscribe(
-          data => {
-            this.router.navigate(['dashboard']);
-              // this.router.navigate(['login']);
-              alert("บันทึกไม่สำเร็จ");
+        },
+        error => {
+          alert("บันทึกไม่สำเร็จ");
+          this.router.navigate(['dashboard']);
 
-          },
-          error => {
-            alert("บันทึกสำเร็จ");
-            this.router.navigate(['dashboard']);
-
-          });
+        });
+ 
   }
+  get id() { return this.angForm.get('id'); }
   get idcard() { return this.angForm.get('idcard'); }
   get title() { return this.angForm.get('title'); }
   get firstname() { return this.angForm.get('firstname'); }
@@ -137,6 +138,6 @@ export class AdduserComponent implements OnInit {
   get sex() { return this.angForm.get('sex'); }
   get blood() { return this.angForm.get('blood'); }
   get birthdate() { return this.angForm.get('birthdate'); }
-  get createby() { return this.angForm.get('createby'); }
-
+  get updateby() { return this.angForm.get('updateby'); }
+ 
 }
