@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
 import { Usermodule } from '../usermodule';
-import { map } from 'rxjs/operators';
+// import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
