@@ -78,13 +78,15 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 export class EdithistoryuserComponent implements OnInit {
 
   angForm: FormGroup;
+  submitted = false;
+
   constructor(private fb: FormBuilder,private dataService: DataserviceService,private router:Router) {
  
     this.angForm = this.fb.group({
         id: [''],
-        idcard: ['',  Validators.required],
+        idcard: ['',  [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
         title: ['', Validators.required],
-        firstname: ['', Validators.required],
+        firstname: ['', Validators.required,],
         lastname: ['', Validators.required],
         sex: ['', Validators.required],
         blood: ['', Validators.required],
@@ -92,7 +94,12 @@ export class EdithistoryuserComponent implements OnInit {
    
     });
    }
- 
+  get f() { return this.angForm.controls; }
+
+  onReset() {
+      this.submitted = false;
+      this.angForm.reset();
+  }
   ngOnInit() {
     let Id = window.localStorage.getItem("editId");
 
@@ -110,16 +117,28 @@ export class EdithistoryuserComponent implements OnInit {
        });
       });
   }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
   postdata(angForm1:NgForm)
   {
+    this.submitted = true;
+    if (this.angForm.invalid) {
+      return;
+    }
+    
     let updateby = localStorage.getItem('role');
     console.log(updateby);
     this.dataService.edithistoryuser(angForm1.value.id,angForm1.value.idcard,angForm1.value.title,angForm1.value.firstname,angForm1.value.lastname,angForm1.value.sex,angForm1.value.blood,angForm1.value.birthdate,updateby)
- 
     .pipe(first())
     .subscribe(
         data => {
-          this.router.navigate(['dashboard']); 
+          // this.router.navigate(['dashboard']); 
           alert("บันทึกสำเร็จ");
 
         },
@@ -141,3 +160,4 @@ export class EdithistoryuserComponent implements OnInit {
   get updateby() { return this.angForm.get('updateby'); }
  
 }
+
