@@ -82,7 +82,7 @@ export class AdduserComponent implements OnInit {
   constructor(private fb: FormBuilder,private dataService: DataserviceService,private router:Router) {
  
     this.angForm = this.fb.group({
-      idcard: ['', Validators.required],
+      idcard: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
       title: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -103,6 +103,14 @@ export class AdduserComponent implements OnInit {
   ngOnInit() {
     // let createby = localStorage.getItem('role');
     // console.log(createby)
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 
   postdata(angForm1:NgForm)
@@ -126,7 +134,7 @@ export class AdduserComponent implements OnInit {
           },
           error => {
             alert("บันทึกสำเร็จ");
-            this.router.navigate(['dashboard']);
+            // this.router.navigate(['dashboard']);
 
           });
   }

@@ -10,11 +10,11 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="formGroupExampleInput">เลขบัตรประชาชน</label>
-                            <input type="number" formControlName="idcard" id="idcard" class="form-control input-sm" autocomplete="off" placeholder="เลขบัตรประชาชน" [ngClass]="{ 'is-invalid': submitted && f.idcard.errors }"/>
+                            <input type="text" (keypress)="numberOnly($event)" formControlName="idcard" id="idcard" class="form-control input-sm" autocomplete="off" placeholder="เลขบัตรประชาชน" [ngClass]="{ 'is-invalid': submitted && f.idcard.errors }"/>
                             <div *ngIf="submitted && f.idcard.errors" class="invalid-feedback">
                                 <div *ngIf="f.idcard.errors.required">กรุณากรอกเลขบัตรประชาชน</div>
-                                <div *ngIf="f.password.errors.minlength">กรุณากรอกเลขบัตรประชาชนกรอกให้ครบ 13 หลัก</div>
-
+                                <div *ngIf="f.idcard.errors.minlength">กรุณากรอกให้ครบ 13 ตัว</div>
+                                <div *ngIf="f.idcard.errors.maxlength">เลขบัตรประชาชนเกิน 13 ตัว</div>
                             </div>
                         </div>
                     </div>
@@ -47,13 +47,19 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="formGroupExampleInput">ชื่อตัวไทย</label>
-                            <input type="text" formControlName="firstname" id="firstname" class="form-control input-sm" autocomplete="off" placeholder="ชื่อตัวไทย">
+                            <input type="text" formControlName="firstname" id="firstname" class="form-control input-sm" autocomplete="off" placeholder="ชื่อตัวไทย" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"/>
+                            <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstname.errors.required">กรุณากรอกชื่อตัวไทย</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="formGroupExampleInput">ชื่อสกุลไทย</label>
-                            <input type="text" formControlName="lastname" id="lastname" class="form-control input-sm" autocomplete="off" placeholder="ชื่อสกุลไทย">
+                            <input type="text" formControlName="lastname" id="lastname" class="form-control input-sm" autocomplete="off" placeholder="ชื่อสกุลไทย" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"/>
+                            <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastname.errors.required">กรุณากรอกชื่อสกุลไทย</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,15 +81,19 @@
                         <div class="form-group">
                             <label for="formGroupExampleInput">วันเกิด</label>
                             <div class="input-group">
-                                <input class="form-control input-sm" autocomplete="off" placeholder="dd/mm/yyyy" formControlName="birthdate" id="birthdate" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
+                                <input class="form-control input-sm" autocomplete="off" placeholder="dd/mm/yyyy" formControlName="birthdate" id="birthdate" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" [ngClass]="{ 'is-invalid': submitted && f.birthdate.errors }"/>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button"></button>
+                                </div>
+                                <div *ngIf="submitted && f.birthdate.errors" class="invalid-feedback">
+                                    <div *ngIf="f.birthdate.errors.required">กรุณาเลือกวันเกิด</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                    <button type="submit" class="btn btn-primary" [disabled]="!angForm.valid">บันทึก</button>
+                    <button type="submit" class="btn btn-primary float-md-right" >บันทึก</button>
+                    <!-- <button type="submit" class="btn btn-primary" [disabled]="!angForm.valid">บันทึก</button> -->
             </form>
         </div>
     </div>
