@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, NgForm } from '@angula
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DataserviceService } from '../dataservice.service';
+import {Usermodule} from '../usermodule'
 // import { ValidationService } from 'src/app/Services/validation.service';
 import {
   NgbCalendar,
@@ -15,6 +16,7 @@ import {
 export class CustomAdapter extends NgbDateAdapter<string> {
 
   readonly DELIMITER = '-';
+
 
   fromModel(value: string): NgbDateStruct {
     let result: NgbDateStruct = null;
@@ -79,6 +81,7 @@ export class EdithistoryuserComponent implements OnInit {
 
   angForm: FormGroup;
   submitted = false;
+  userMo : Usermodule   ;
 
   constructor(private fb: FormBuilder,private dataService: DataserviceService,private router:Router) {
  
@@ -112,9 +115,23 @@ export class EdithistoryuserComponent implements OnInit {
       .subscribe( data => {
       //  this.angForm.controls[email].setValue('name')
       //  this.email.nativeElement.value = 'This is new value';
-        this.angForm.patchValue({
-          id:data[0].ID, idcard:data[0].CITIZEN_ID, title:data[0].TITLE, firstname:data[0].FIRST_NAME, lastname:data[0].LAST_NAME, sex:data[0].SEX, blood:data[0].BLOOD, birthdate:data[0].BIRTH_DATE
-       });
+      //   this.angForm.patchValue({
+      //     id:data[0].ID, idcard:data[0].CITIZEN_ID, title:data[0].TITLE, firstname:data[0].FIRST_NAME, lastname:data[0].LAST_NAME, sex:data[0].SEX, blood:data[0].BLOOD, birthdate:data[0].BIRTH_DATE
+      //  });
+//       ID: "17"
+// CITIZEN_ID: "1839900463766"
+// TITLE: "1"
+// FIRST_NAME: "สมหญิง"
+// LAST_NAME: "ณ อยุธยา"
+// SEX: "M"
+// BLOOD: "2"
+// BIRTH_DATE: "1992-02-22"
+// CREATE_DATE: "2020-02-18 14:08:48"
+// CREATE_BY: "admin
+this.userMo = data;
+ 
+ 
+       console.log('test userMo :',this.userMo);
       });
   }
 
@@ -125,16 +142,16 @@ export class EdithistoryuserComponent implements OnInit {
     }
     return true;
   }
-  postdata(angForm1:NgForm)
+  postdata()
   {
-    this.submitted = true;
-    if (this.angForm.invalid) {
-      return;
-    }
+    // this.submitted = true;
+    // if (this.angForm.invalid) {
+    //   return;
+    // }
     
-    let updateby = localStorage.getItem('role');
-    console.log(updateby);
-    this.dataService.edithistoryuser(angForm1.value.id,angForm1.value.idcard,angForm1.value.title,angForm1.value.firstname,angForm1.value.lastname,angForm1.value.sex,angForm1.value.blood,angForm1.value.birthdate,updateby)
+     let updateby = localStorage.getItem('role');
+    this.userMo.USER_NAME = updateby;
+    this.dataService.edithistoryuser(this.userMo)
     .pipe(first())
     .subscribe(
         data => {
@@ -144,20 +161,20 @@ export class EdithistoryuserComponent implements OnInit {
         },
         error => {
           alert("บันทึกไม่สำเร็จ");
-          this.router.navigate(['dashboard']);
+          // this.router.navigate(['dashboard']);
 
         });
  
   }
-  get id() { return this.angForm.get('id'); }
-  get idcard() { return this.angForm.get('idcard'); }
-  get title() { return this.angForm.get('title'); }
-  get firstname() { return this.angForm.get('firstname'); }
-  get lastname() { return this.angForm.get('lastname'); }
-  get sex() { return this.angForm.get('sex'); }
-  get blood() { return this.angForm.get('blood'); }
-  get birthdate() { return this.angForm.get('birthdate'); }
-  get updateby() { return this.angForm.get('updateby'); }
+  // get id() { return this.angForm.get('id'); }
+  // get idcard() { return this.angForm.get('idcard'); }
+  // get title() { return this.angForm.get('title'); }
+  // get firstname() { return this.angForm.get('firstname'); }
+  // get lastname() { return this.angForm.get('lastname'); }
+  // get sex() { return this.angForm.get('sex'); }
+  // get blood() { return this.angForm.get('blood'); }
+  // get birthdate() { return this.angForm.get('birthdate'); }
+  // get updateby() { return this.angForm.get('updateby'); }
  
 }
 

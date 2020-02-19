@@ -45,26 +45,31 @@ public updateuserdetails(id,name,email,pwd,mobile) {
  
 }
 
-public edithistoryuser(id, idcard, title, firstname, lastname, sex, blood, birthdate, updateby) {
-  return this.httpClient.post<any>(this.baseUrl + '/updatehitoryuser.php', { id, idcard, title, firstname, lastname, sex, blood, birthdate, updateby })
+public edithistoryuser(userMo:Usermodule) {
+  var data = JSON.stringify(userMo);
+  return this.httpClient.post<any>(this.baseUrl + '/updatehitoryuser.php', data)
     .pipe(map(Usermodule => {
           return Usermodule;
       }));
  
 }
 
-public gethistoryUserId(empid: number): Observable<Usermodule[]>
+public gethistoryUserId(empid: number): Observable<Usermodule>
   {
-    return this.httpClient.get<Usermodule[]>(
+    return this.httpClient.get<Usermodule>(
       this.baseUrl + '/gethistoryuserdataone.php?'+ 'empid=' + empid 
       );
   }
 
 
-
-removeEmployee(empid: number): Observable<Usermodule[]> {
-  return this.httpClient.delete<Usermodule[]>(this.baseUrl+'/deletedata.php?empid='+empid );
+removeEmployee(ID: number): Observable<Usermodule[]> {
+  return this.httpClient.delete<Usermodule[]>(this.baseUrl+'/deletedata.php?id='+ID );
 }
+
+
+// removeEmployee(empid: number): Observable<Usermodule[]> {
+//   return this.httpClient.delete<Usermodule[]>(this.baseUrl+'/deletedata.php?empid='+empid );
+// }
 public getUserId(empid: number): Observable<Usermodule[]>
   {
     return this.httpClient.get<Usermodule[]>(
