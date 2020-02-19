@@ -81,7 +81,7 @@ export class EdithistoryuserComponent implements OnInit {
 
   angForm: FormGroup;
   submitted = false;
-  userMo : Usermodule   ;
+  userMo : Usermodule;
 
   constructor(private fb: FormBuilder,private dataService: DataserviceService,private router:Router) {
  
@@ -103,6 +103,7 @@ export class EdithistoryuserComponent implements OnInit {
       this.submitted = false;
       this.angForm.reset();
   }
+  
   ngOnInit() {
     let Id = window.localStorage.getItem("editId");
 
@@ -113,24 +114,7 @@ export class EdithistoryuserComponent implements OnInit {
     }
     this.dataService.gethistoryUserId(+Id)
       .subscribe( data => {
-      //  this.angForm.controls[email].setValue('name')
-      //  this.email.nativeElement.value = 'This is new value';
-      //   this.angForm.patchValue({
-      //     id:data[0].ID, idcard:data[0].CITIZEN_ID, title:data[0].TITLE, firstname:data[0].FIRST_NAME, lastname:data[0].LAST_NAME, sex:data[0].SEX, blood:data[0].BLOOD, birthdate:data[0].BIRTH_DATE
-      //  });
-//       ID: "17"
-// CITIZEN_ID: "1839900463766"
-// TITLE: "1"
-// FIRST_NAME: "สมหญิง"
-// LAST_NAME: "ณ อยุธยา"
-// SEX: "M"
-// BLOOD: "2"
-// BIRTH_DATE: "1992-02-22"
-// CREATE_DATE: "2020-02-18 14:08:48"
-// CREATE_BY: "admin
-this.userMo = data;
- 
- 
+      this.userMo = data;
        console.log('test userMo :',this.userMo);
       });
   }
